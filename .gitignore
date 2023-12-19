@@ -1,0 +1,19 @@
+.vscode/
+__pycache__/
+.ipynb_checkpoints/
+model/
+model_runs/
+model_hparam_runs/
+test_outputs/
+notebooks/
+.notebooks_ipynb/
+catboost_info/
+*.pyc
+.devcontainer/
+
+# Model files
+*.pt
+*.cbm
+
+# Generated figures
+results/figures/
