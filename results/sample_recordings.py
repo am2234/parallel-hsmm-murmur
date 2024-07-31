@@ -22,7 +22,7 @@ for i, (ax, (series, t0, t1)) in enumerate(zip(axes, sseries)):
     rec = rec[int(t0 * fs) : int(t1 * fs)]
 
     t_series = np.arange(len(rec)) / fs
-    ax.plot(t_series, rec, c="#545454", lw=1)
+    ax.plot(t_series, rec, c=[0.2,0.2,0.2], lw=1)
     ax.set_xlim(0, t_series[-1])
     ax.set_yticks([])
     ax.set_ylabel("Amplitude")
