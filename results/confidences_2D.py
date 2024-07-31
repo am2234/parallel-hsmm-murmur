@@ -10,7 +10,7 @@ recordings_df["diff"] = recordings_df["holo_HSMM"] - recordings_df["healthy_HSMM
 recordings_df["max"] = recordings_df[["holo_HSMM", "healthy_HSMM"]].max(axis=1)
 recordings_df.index = recordings_df.index.str.split("_", expand=True)
 
-font = {"size": 8, "family": "Arial"}
+font = {"size": 9, "family": "Arial"}
 plt.rc("font", **font)
 
 plt.rcParams["text.latex.preamble"] = [
@@ -21,13 +21,13 @@ plt.rcParams["text.latex.preamble"] = [
     r"\sansmath",  # <- tricky! -- gotta actually tell tex to use!
 ]
 
-fig, axes = plt.subplots(figsize=(5.2, 4), dpi=300)
+fig, axes = plt.subplots(figsize=(5.2, 4), dpi=500)
 axes.set_facecolor("white")
 fig.set_facecolor("white")
 style = {
     "Absent": ["#8cb464", "x", "Murmur absent"],
     "Present": ["#ff392e", "o", "Murmur present"],
-    "Unknown": ["gray", "d", "Unknown (poor signal qual.)"],
+    "Unknown": ["gray", "d", "Unknown"],
 }
 
 for group in ["Absent", "Present", "Unknown"]:
@@ -47,7 +47,7 @@ MURMUR_THRESHOLD = 0.0  # 36842
 SQ_THRESHOLD = 0.65
 
 axes.axhline(MURMUR_THRESHOLD, ls="--", c="gray", lw=1, label="Murmur threshold")
-axes.axvline(SQ_THRESHOLD, ls=":", c="gray", lw=1, label="Signal quality threshold")
+axes.axvline(SQ_THRESHOLD, ls=":", c="gray", lw=1, label="Quality threshold")
 axes.set_xlabel("$C^{(\hat{\omega})}$")
 axes.set_ylabel("$C^{(M-N)}$")
 
@@ -74,3 +74,4 @@ axes.grid(alpha=0.2)
 
 fig.tight_layout()
 plt.savefig("results/figures/confidences_2D.png")
+plt.savefig("results/figures/confidences_2D.tif")

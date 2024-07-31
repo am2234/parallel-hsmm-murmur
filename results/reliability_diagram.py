@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-font = {"size": 8, "family": "Arial"}
+font = {"size": 9, "family": "Arial"}
 plt.rc("font", **font)
 
 model_folder = pathlib.Path("final_model/").resolve()
@@ -20,7 +20,7 @@ for group, _df in recordings_df.groupby("diff_bin"):
     sens = (_df["rec_murmur_label"] == "Present").mean()
     r.append(sens)
 
-fig, axes = plt.subplots(figsize=(3, 2.5), dpi=300)
+fig, axes = plt.subplots(figsize=(4.5, 2.5), dpi=500)
 
 axes.bar(bins[:-1], r, edgecolor="k", width=0.025, align="edge", facecolor="#6983ac")
 axes.set_ylim(0, 1)
@@ -30,4 +30,6 @@ axes.set_ylabel("Relative frequency of murmurs")
 axes.set_xlim(bins[0], bins[-1])
 axes.plot([-0.075, 0.27], (0, 1), c="k", ls="--")
 
-plt.savefig("results/figures/reliability_diagram.png", bbox_inches="tight")
+fig.tight_layout()
+plt.savefig("results/figures/reliability_diagram.png")
+plt.savefig("results/figures/reliability_diagram.tif")

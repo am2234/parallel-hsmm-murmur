@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import utils
 
-font = {"size": 8, "family": "Arial"}
+font = {"size": 9, "family": "Arial"}
 plt.rc("font", **font)
 COLOR = "#545454"
 
@@ -14,7 +14,7 @@ envelope = np.loadtxt(FOLDER_SPRINGER / "out_envelope.csv", delimiter=",")
 series, fs = utils.load_recording("85203_AV.wav")
 
 fig, axes = plt.subplots(
-    3, 2, figsize=(7.5, 6), dpi=300, gridspec_kw={"hspace": 0.4, "wspace": 0.3}
+    3, 2, figsize=(7.5, 6), dpi=500#, gridspec_kw={"hspace": 0.4, "wspace": 0.3}
 )
 
 T0 = 6
@@ -95,4 +95,6 @@ axes[2, 1].legend()
 
 fig.align_ylabels()
 
-plt.savefig("results/figures/heart_rate_estimate.png", bbox_inches="tight")
+fig.tight_layout()
+plt.savefig("results/figures/heart_rate_estimate.png")
+plt.savefig("results/figures/heart_rate_estimate.tif")

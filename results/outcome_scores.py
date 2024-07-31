@@ -1,12 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font = {"size": 8, "family": "Arial"}
+font = {"size": 9, "family": "Arial"}
 plt.rc("font", **font)
 
 outcome_df = pd.read_csv("results/official_outcome_scores.tsv", sep="\t", index_col=0)
 
-fig, axes = plt.subplots(figsize=(4, 4), dpi=300)
+fig, axes = plt.subplots(figsize=(4, 3.8), dpi=500)
+axes.set_aspect("equal")
 axes.plot(
     outcome_df.iloc[1:]["Cost on Training Set"],
     outcome_df.iloc[1:]["Cost on Test Set"],
@@ -40,4 +41,6 @@ axes.text(14300, 10800, "Improving\ntest score")
 
 axes.grid(alpha=0.2)
 
-plt.savefig("results/figures/outcome_scores.png", bbox_inches="tight")
+fig.tight_layout()
+plt.savefig("results/figures/outcome_scores.png")
+plt.savefig("results/figures/outcome_scores.tif")

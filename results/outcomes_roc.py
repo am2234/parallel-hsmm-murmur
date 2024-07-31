@@ -6,6 +6,9 @@ import pandas as pd
 import sklearn.metrics
 from utils import outcome_cost, read_training_spreadsheet
 
+font = {"size": 9, "family": "Arial"}
+plt.rc("font", **font)
+
 
 def conf_matrix_calc(se, sp, prevalence, num_patients):
     """Reverse engineer a confusion matrix using sensitivity, specificity, prevalence, N"""
@@ -50,19 +53,7 @@ def main():
 
     PREVALENCE = sum(df.Outcome == "Abnormal") / len(df) * 1
     print("Prevalence in training set", PREVALENCE)
-
-    se_range = np.linspace(0, 1, 100)
-    sp_range = np.linspace(1, 0, 100)
-    SE, SP = np.meshgrid(se_range, sp_range)
-    out = [
-        outcome_cost_from_metrics(x, y, PREVALENCE, len(df))
-        for x, y in zip(SE.ravel(), SP.ravel())
-    ]
-    out = np.array(out).reshape(SE.shape)
-
-    font = {"size": 8, "family": "Arial"}
-    plt.rc("font", **font)
-    fig, axes = plt.subplots(figsize=(6, 4.5), dpi=300)
+    fig, axes = plt.subplots(figsize=(6, 4.5), dpi=500)
     axes.invert_xaxis()
     axes.set_aspect("equal")
     axes.set_facecolor("white")
@@ -105,8 +96,8 @@ def main():
     axes.text(0.217 - 0.02, 0.783 - 0.001, "12579", va="center", c="white")
 
     axes.legend(loc="lower right", facecolor="lightgray", labelcolor="black", edgecolor="black")
-
     plt.savefig("results/figures/outcomes_roc.png", bbox_inches="tight")
+    plt.savefig("results/figures/outcomes_roc.tif", bbox_inches="tight")
 
 
 if __name__ == "__main__":

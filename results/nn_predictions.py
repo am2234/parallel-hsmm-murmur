@@ -10,7 +10,7 @@ sys.path.append("")
 from src.neural_networks import calculate_features
 import utils
 
-font = {"size": 8, "family": "Arial"}
+font = {"size": 9, "family": "Arial"}
 plt.rc("font", **font)
 
 rec, fs = utils.load_recording("50260_MV.wav")
@@ -23,7 +23,7 @@ rec = rec[int(T0 * fs) : int(T1 * fs)]
 model_folder = pathlib.Path("final_model/").resolve()
 posteriors = np.loadtxt(model_folder / "50260_MV_posteriors.csv", delimiter=",")
 
-fig, axes = plt.subplots(3, 1, figsize=(5.2, 4), sharex="all", dpi=300)
+fig, axes = plt.subplots(3, 1, figsize=(5.2, 4), sharex="all", dpi=500)
 
 t_rec = np.arange(len(rec)) / fs
 axes[0].plot(t_rec, rec, lw=1, c=[0.2, 0.2, 0.2])
@@ -52,3 +52,4 @@ fig.align_ylabels()
 fig.tight_layout(h_pad=0.4)
 
 plt.savefig("results/figures/nn_predictions.png")
+plt.savefig("results/figures/nn_predictions.tif")
